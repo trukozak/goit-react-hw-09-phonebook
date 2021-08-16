@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import {
+  authFormBtnSelectors,
+  authFormPlaceholders,
+  authFormSelectors,
+} from '../../languages/languageSelectors/authForm';
 import {
   loginOperation,
   registerOperation,
 } from '../../redux/auth/authOperations';
+import { LanguageContext } from '../App';
 import AuthFormStyled from './AuthFormStyled';
 
 const initialState = { name: '', email: '', password: '' };
 
 const AuthForm = () => {
+  const { language } = useContext(LanguageContext);
+
   const [state, setState] = useState(initialState);
   const location = useLocation();
   const dispatch = useDispatch();
@@ -33,11 +41,11 @@ const AuthForm = () => {
     <AuthFormStyled autoComplete="off" onSubmit={onHandleSubmit}>
       {location.pathname === '/register' && (
         <label>
-          Name
+          {authFormSelectors(language, 'username')} <br />
           <input
             type="text"
             name="name"
-            placeholder="Enter name"
+            placeholder={authFormPlaceholders(language, 'name')}
             autoComplete="on"
             pattern="^[A-ZA-ZА-ЯА-Я]+(([' -][A-ZA-ZА-ЯА-Я])?[a-zA-Zа-яА-Я]*)*$"
             title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
@@ -48,7 +56,7 @@ const AuthForm = () => {
         </label>
       )}
       <label>
-        Email
+        {authFormSelectors(language, 'email')} <br />
         <input
           type="text"
           name="email"
@@ -60,11 +68,12 @@ const AuthForm = () => {
         />
       </label>
       <label>
-        Password
+        {authFormSelectors(language, 'password')}
+        <br />
         <input
           type="text"
           name="password"
-          placeholder="Enter password"
+          placeholder={authFormPlaceholders(language, 'password')}
           minLength="5"
           autoComplete="on"
           required
@@ -73,10 +82,11 @@ const AuthForm = () => {
         />
       </label>
       <button type="submit">
-        {location.pathname === '/register' ? 'Register' : 'Login'}
+        {location.pathname === '/register'
+          ? authFormBtnSelectors(language, 'register')
+          : authFormBtnSelectors(language, 'login')}
       </button>
     </AuthFormStyled>
   );
 };
-
 export default AuthForm;

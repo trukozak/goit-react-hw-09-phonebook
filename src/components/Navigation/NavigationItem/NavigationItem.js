@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { navSelectors } from '../../../languages/languageSelectors/navigation';
+import { LanguageContext } from '../../App';
 const NavigationItem = ({
   path,
   exact,
@@ -8,6 +10,7 @@ const NavigationItem = ({
   restricted,
   isAuth,
 }) => {
+  const { language } = useContext(LanguageContext);
   return (
     <>
       {!isPrivate && !restricted && (
@@ -18,7 +21,7 @@ const NavigationItem = ({
             to={path}
             exact={exact}
           >
-            {name.toUpperCase()}
+            {navSelectors(language, 'home')}
           </NavLink>
         </li>
       )}
@@ -30,7 +33,7 @@ const NavigationItem = ({
             to={path}
             exact={exact}
           >
-            {name.toUpperCase()}
+            {navSelectors(language, 'contacts')}
           </NavLink>
         </li>
       )}
@@ -42,7 +45,7 @@ const NavigationItem = ({
             to={path}
             exact={exact}
           >
-            {name.toUpperCase()}
+            {navSelectors(language, [name])}
           </NavLink>
         </li>
       )}
