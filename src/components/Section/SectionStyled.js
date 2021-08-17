@@ -6,6 +6,5 @@ export const SectionStyled = styled.section`
     color: teal;
     padding-left: 15px;
     padding-right: 15px;
-    margin: 10px auto;
   }
 `;

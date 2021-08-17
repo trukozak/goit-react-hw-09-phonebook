@@ -4,10 +4,10 @@ const AuthFormStyled = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin: 10px;
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid ${props => props.colors.title};
   border-radius: 6px;
+  color: ${props => props.colors.title};
 
   label {
     margin-bottom: 20px;
@@ -17,7 +17,7 @@ const AuthFormStyled = styled.form`
     margin-bottom: 10px;
     margin-left: 5px;
     padding: 5px;
-    border-color: teal;
+    border-color: ${props => props.colors.edit};
     border-radius: 5px;
   }
   button {

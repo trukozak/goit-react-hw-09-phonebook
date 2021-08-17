@@ -10,13 +10,14 @@ import {
   loginOperation,
   registerOperation,
 } from '../../redux/auth/authOperations';
-import { LanguageContext } from '../App';
+import { LanguageContext, ThemeContext } from '../App';
 import AuthFormStyled from './AuthFormStyled';
 
 const initialState = { name: '', email: '', password: '' };
 
 const AuthForm = () => {
   const { language } = useContext(LanguageContext);
+  const { theme } = useContext(ThemeContext);
 
   const [state, setState] = useState(initialState);
   const location = useLocation();
@@ -38,7 +39,11 @@ const AuthForm = () => {
   };
 
   return (
-    <AuthFormStyled autoComplete="off" onSubmit={onHandleSubmit}>
+    <AuthFormStyled
+      autoComplete="off"
+      onSubmit={onHandleSubmit}
+      colors={theme.colors}
+    >
       {location.pathname === '/register' && (
         <label>
           {authFormSelectors(language, 'username')} <br />

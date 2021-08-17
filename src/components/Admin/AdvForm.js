@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import {useDispatch, useSelector } from 'react-redux';
+import React, { useContext, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   addContactOperations,
   fetchContactsOperations,
 } from '../../redux/contacts/contactsOperations';
 import { getContacts } from '../../redux/contacts/contactsSelector';
+import { ThemeContext } from '../App';
 import { AdvFormStyled } from './AdvForm.Styled';
 
 const initialState = {
@@ -12,13 +13,15 @@ const initialState = {
   number: '',
 };
 const AdvForm = () => {
+  const { theme } = useContext(ThemeContext);
+
   const [state, setState] = useState(initialState);
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
 
   useEffect(() => {
     dispatch(fetchContactsOperations());
-  },[dispatch]);
+  }, [dispatch]);
 
   const onHandleChange = e => {
     const { name, value } = e.target;
@@ -35,14 +38,16 @@ const AdvForm = () => {
       return alert(`${state.name} is already in contacts.`);
     }
 
-    dispatch(addContactOperations({
-      ...state,
-    }));
+    dispatch(
+      addContactOperations({
+        ...state,
+      }),
+    );
     setState({ ...initialState });
   };
 
   return (
-    <AdvFormStyled>
+    <AdvFormStyled colors={theme.colors}>
       <form onSubmit={onHandleSubmit}>
         <label>
           Name
@@ -77,6 +82,5 @@ const AdvForm = () => {
     </AdvFormStyled>
   );
 };
-
 
 export default AdvForm;

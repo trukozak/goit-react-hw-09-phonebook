@@ -14,7 +14,7 @@ const LanguageSwitcher = () => {
       <select
         value={language}
         onChange={selectLanguage}
-        style={{ width: '100px' }}
+        style={{ width: '100px', position: 'absolute', top: 70, right: 10 }}
       >
         {languages.list.map(lang => (
           <option value={lang} key={lang}>

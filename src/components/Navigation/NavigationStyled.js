@@ -10,7 +10,7 @@ export const NavigationContainer = styled.nav`
     margin-right: 20px;
   }
   .navLink {
-    color: white;
+    color: ${props => props.colors.title};
     text-decoration: none;
   }
   .navLinkActive {

@@ -8,10 +8,11 @@ export const UserMenuStyled = styled.div`
   .text {
     font-weight: 700;
     font-size: 16px;
-    color: #f1e7f3;
+    color: ${props => props.colors.title};
   }
   button {
     margin-left: 10px;
+    margin-right: 20px;
     font-size: 14px;
     padding: 10px;
     font-weight: 700;
